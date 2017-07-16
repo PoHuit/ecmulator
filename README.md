@@ -17,7 +17,7 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
   The module or drone is specified in the format
 
-  > *\<base-type\>\<variant\>[*`x`*\<count\>]*
+  > *&lt;base-type&gt;&lt;variant&gt;[*`x`*&lt;count&gt;]*
 
   The *count* defaults to 1 if omitted.
 
@@ -25,21 +25,21 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
   * D: A drone. The *variant* must be one of:
 
-    * 3: EC-300
-    * 6: EC-600
-    * 9: EC-900
+      * 3: EC-300
+      * 6: EC-600
+      * 9: EC-900
 
   * M: A multispectral jammer. The *variant* must be one of:
 
-    * 1: T1
-    * M: Meta 1
-    * 2: T2
-    * L: Legion
-    * G: Dread Guristas
-    * K: Kaikka's
-    * T: Thon's
-    * V: Vaipas' *[sic]*
-    * E: Estamel's
+      * 1: T1
+      * M: Meta 1
+      * 2: T2
+      * L: Legion
+      * G: Dread Guristas
+      * K: Kaikka's
+      * T: Thon's
+      * V: Vaipas' *[sic]*
+      * E: Estamel's
 
   * R or X: a "matched" or "mismatched" racial jammer,
     respectively. The "matched" case (R) applies the jammer
@@ -47,32 +47,30 @@ Run `python3 ecmulator.py` with appropriate arguments.
     "mismatched" case (X) applies the jammer to a hull of
     some other sensor type. The *variant* must be one of:
 
-    * 1: T1
-    * M: Meta 1
-    * 2: T2
-    * S: Storyline [named]
-    * L: Legion
+      * 1: T1
+      * M: Meta 1
+      * 2: T2
+      * S: Storyline [named]
+      * L: Legion
 
   * B: A Burst Jammer. These have a 30 second cycle time
     instead of 20, which is not taken into account here in
     any way. The *variant* must be one of:
 
-    * 1: T1
-    * M: Meta
-    * 2: T2
-    * G: 'Ghost'
-    * S: Sentient
-    * D: Unit D-34343's Modified
-    * F: Unit F-435454's Modified
-    * P: Unit P-343554's Modified
-    * W: Unit W-634's Modified
+      * 1: T1
+      * M: Meta
+      * 2: T2
+      * G: 'Ghost'
+      * S: Sentient
+      * D: Unit D-34343's Modified
+      * F: Unit F-435454's Modified
+      * P: Unit P-343554's Modified
+      * W: Unit W-634's Modified
 
   For example, if you have 1 matched racial meta jammer and 4
   mismatched racial meta jammers fitted, say
 
-  ```
-  --j RM --j XMx4
-  ```
+      --j RM --j XMx4
 
 * The `--resist` (`-r`) argument specifies the sensor
   strength of the target hull. The default of 20 represents
@@ -91,26 +89,27 @@ Run `python3 ecmulator.py` with appropriate arguments.
   programmatic calculation useful.
 
 * The `--fitting` (`-f`) argument specifies a rig or module
-  that affects ECM strength. See the description of `--jam`
-  for general syntax. Stacking penalties are applied.
+  that gives an ECM strength bonus. See the description of
+  `--jam` for general syntax. Stacking penalties are
+  applied.
 
   The *base types* are as follows:
 
   * S: A Signal Distortion Amplifier module. The *variant*
     must be one of:
 
-    * 1: T1
-    * i: Initiated
-    * I: Induced *[sigh]*
-    * C: Compulsive
-    * H: 'Hypnos'
-    * 2: T2
+      * 1: T1
+      * i: Initiated
+      * I: Induced *[sigh]*
+      * C: Compulsive
+      * H: 'Hypnos'
+      * 2: T2
 
   * P: A Particle Dispersion Augmentor rig. The *variant*
     must be one of:
 
-    * 1: T1
-    * 2: T2
+      * 1: T1
+      * 2: T2
 
 ## Frequently Asked Questions
 
