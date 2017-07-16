@@ -39,6 +39,16 @@ jammer_strengths = {
     "X2": 1.2,  # T2
     "XS": 1.15, # Storyline
     "XL": 1.2,  # Legion
+    # Burst
+    "B1": 6.0,  # T1
+    "BM": 6.6,  # Meta
+    "B2": 7.2,  # T2
+    "BG": 7.0,  # 'Ghost'
+    "BS": 8.0,  # Sentient
+    "BD": 9.0,  # Unit D-34343's Modified
+    "BF": 9.5,  # Unit F-435454's Modified
+    "BP": 12.7, # Unit P-343554's Modified
+    "BW": 10.5, # Unit W-634's Modified
 }
 jam_pattern = "|".join(jammer_strengths.keys())
 jam_regex = re.compile("(%s)(x[1-9])?" % jam_pattern)

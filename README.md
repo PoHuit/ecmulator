@@ -53,10 +53,26 @@ Run `python3 ecmulator.py` with appropriate arguments.
     * S: Storyline [named]
     * L: Legion
 
+  * B: A Burst Jammer. These have a 30 second cycle time
+    instead of 20, which is not taken into account here in
+    any way. The *variant* must be one of:
+
+    * 1: T1
+    * M: Meta
+    * 2: T2
+    * G: 'Ghost'
+    * S: Sentient
+    * D: Unit D-34343's Modified
+    * F: Unit F-435454's Modified
+    * P: Unit P-343554's Modified
+    * W: Unit W-634's Modified
+
   For example, if you have 1 matched racial meta jammer and 4
   mismatched racial meta jammers fitted, say
 
-            --j RM --j XMx4
+  ```
+  --j RM --j XMx4
+  ```
 
 * The `--resist` (`-r`) argument specifies the sensor
   strength of the target hull. The default of 20 represents
@@ -121,10 +137,6 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
   A: Not yet. You can script something with a plotting tool
      if you want to make your own.
-
-* Q: *What about Burst Jammers?*
-
-  A: Yeah, forgot about those. Will fix sometime soon.
 
 ## License
 
