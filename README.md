@@ -88,6 +88,32 @@ Run `python3 ecmulator.py` with appropriate arguments.
     * 1: T1
     * 2: T2
 
+## Frequently Asked Questions
+
+* Q: *Why doesn't this tool also deal with ECM ranges?*
+
+  A: Your fitting tool does this fine.
+
+* Q: *Why not just copy jam strengths from my fitting tool?*
+
+  A: What a pain.
+
+* Q: *What about implants?*
+
+  A: As far as I know, there are not any that specifically
+     affect ECM strength.
+
+* Q: *Why is the syntax for specifying jams and fittings so
+     gross?*
+
+  A: It was designed for brevity and scripting rather than
+     for readability. Patches welcome.
+
+* Q: *Can you do pretty graphs?*
+
+  A: Not yet. You can script something with a plotting tool
+     if you want to make your own.
+
 ## License
 
 This program is licensed under the "MIT License". Please see
