@@ -140,6 +140,8 @@ args = parser.parse_args()
 if not args.jams:
     print("no jammers specified")
     exit(1)
+if not args.fittings:
+    args.fittings = []
 
 # Process arguments.
 jams = [Jam(desc) for desc in args.jams]
