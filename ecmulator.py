@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 # Copyright (c) 2017 Po Huit
+# [This program is licensed under the "MIT License"]
+# Please see the file COPYING in the source
+# distribution of this software for license terms.
+
 
 # Jam probabilities for an EVE Online ECM ship setup.
 
