@@ -164,7 +164,10 @@ def stacking(n):
 
 # Collect the fitting bonuses and compute an overall bonus
 # including stacking.
-bonuses = sorted([f.bonus for f in fittings], reverse=True)
+bonuses = list()
+for f in fittings:
+    bonuses += [f.bonus] * f.count
+bonuses = sorted(bonuses, reverse=True)
 fitting_bonus = 1.0
 for b in range(len(bonuses)):
     fitting_bonus *= 1.0 + bonuses[b] * stacking(b)
