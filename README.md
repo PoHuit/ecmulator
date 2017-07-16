@@ -10,9 +10,9 @@ of ECM modules and drones.
 
 Run `python3 ecmulator.py` with appropriate arguments.
 
-* The `--jam` argument specifies a jam module or drone,
-  including a repeat count for convenience. The module
-  or drone is specified by
+* The `--jam` (`-j`) argument specifies a jam module or
+  drone, including a repeat count for convenience. The
+  module or drone is specified by
 
   > *\<base-type\>\<variant\>[*`x`*\<count\>]*
 
@@ -49,6 +49,12 @@ Run `python3 ecmulator.py` with appropriate arguments.
     * 2: T2
     * S: Storyline [named]
     * L: Legion
+
+* The `--resist` (`-r`) argument specifies the sensor
+  strength of the target hull.
+
+* The `--skill` (`-s`) argument specifies the ECM skill
+  level of the pilot.
 
 ## License
 

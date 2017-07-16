@@ -73,12 +73,32 @@ parser = argparse.ArgumentParser(description="ECM jam probabilities.")
 parser.add_argument("-j", "--jam", action="append", nargs=1,
                     help="Add a jam to the fit.",
                     dest="jams")
+parser.add_argument("-r", "--resist", nargs=1, type=int,
+                    help="Sensor strength of target ship (default 20).",
+                    default=20,
+                    dest="resist")
+parser.add_argument("-s", "--skill", nargs=1, type=int,
+                    help="Pilot ECM skill level (default 5).",
+                    default=5,
+                    dest="skill")
 args = parser.parse_args()
 if not args.jams:
     print("no jammers specified")
     exit(1)
 
-# Process jammers.
+# Process arguments.
 jams = [Jam(desc[0]) for desc in args.jams]
+resist = int(args.resist[0])
+if resist <= 0:
+    print("non-positive resist:", resist)
+    exit(1)
+skill = int(args.skill[0])
+if skill < 1 or skill > 5:
+    print("skill must be between 1 and 5:", skill)
+    exit(1)
+
+# Show status
 for j in jams:
     print(j)
+print("resist:", resist)
+print("skill:", skill)
