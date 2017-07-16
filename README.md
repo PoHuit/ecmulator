@@ -114,6 +114,10 @@ Run `python3 ecmulator.py` with appropriate arguments.
   A: Not yet. You can script something with a plotting tool
      if you want to make your own.
 
+* Q: *What about Burst Jammers?*
+
+  A: Yeah, forgot about those. Will fix sometime soon.
+
 ## License
 
 This program is licensed under the "MIT License". Please see
