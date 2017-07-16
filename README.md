@@ -51,10 +51,13 @@ Run `python3 ecmulator.py` with appropriate arguments.
     * L: Legion
 
 * The `--resist` (`-r`) argument specifies the sensor
-  strength of the target hull.
+  strength of the target hull. The default of 20 represents
+  an "average" T1 Cruiser hull.
 
-* The `--skill` (`-s`) argument specifies the ECM skill
-  level of the pilot.
+* The `--skill` (`-s`) argument specifies the Signal
+  Dispersion skill level of the pilot. Jammer effectiveness
+  increases by 5% per level. The default of 5 is what a good
+  pilot should have.
 
 ## License
 

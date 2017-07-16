@@ -70,15 +70,15 @@ class Jam:
 
 # Parse arguments.
 parser = argparse.ArgumentParser(description="ECM jam probabilities.")
-parser.add_argument("-j", "--jam", action="append", nargs=1,
+parser.add_argument("-j", "--jam", action="append",
                     help="Add a jam to the fit.",
                     dest="jams")
-parser.add_argument("-r", "--resist", nargs=1, type=int,
+parser.add_argument("-r", "--resist", type=int,
                     help="Sensor strength of target ship (default 20).",
                     default=20,
                     dest="resist")
-parser.add_argument("-s", "--skill", nargs=1, type=int,
-                    help="Pilot ECM skill level (default 5).",
+parser.add_argument("-s", "--skill", type=int,
+                    help="Pilot Signal Dispersion skill level (default 5).",
                     default=5,
                     dest="skill")
 args = parser.parse_args()
@@ -87,18 +87,26 @@ if not args.jams:
     exit(1)
 
 # Process arguments.
-jams = [Jam(desc[0]) for desc in args.jams]
-resist = int(args.resist[0])
+jams = [Jam(desc) for desc in args.jams]
+resist = args.resist
 if resist <= 0:
     print("non-positive resist:", resist)
     exit(1)
-skill = int(args.skill[0])
+skill = args.skill
 if skill < 1 or skill > 5:
     print("skill must be between 1 and 5:", skill)
     exit(1)
 
-# Show status
+# Collect the strengths.
+strengths = list()
 for j in jams:
-    print(j)
-print("resist:", resist)
-print("skill:", skill)
+    strength = j.strength
+    if j.jam != "D":
+        strength *= 1.0 + 0.05 * skill
+    strengths += [strength] * j.count
+
+# Do the math and print the result.
+cp = 1.0
+for s in strengths:
+    cp *= (resist - s)/resist
+print("jam probability:", 1.0 - cp)
