@@ -4,7 +4,6 @@
 # Please see the file COPYING in the source
 # distribution of this software for license terms.
 
-
 # Jam probabilities for an EVE Online ECM ship setup.
 
 from math import exp
@@ -176,10 +175,10 @@ for j in jams:
     if j.jam != "D":
         strength *= base_bonus * fitting_bonus
     strengths += [strength] * j.count
-    print("jam strength:", j.desc, strength)
+    print("jam strength:", j.desc, round(strength, 2))
 
 # Do the math and print the result.
 cp = 1.0
 for s in strengths:
     cp *= (resist - s)/resist
-print("jam probability:", 1.0 - cp)
+print("jam probability:", str(round((1.0 - cp) * 100)) + "%")
