@@ -7,9 +7,13 @@
 # Jam probabilities for an EVE Online ECM ship setup.
 
 from math import exp
-from sys import exit
+from sys import exit, stderr
 import argparse
 import re
+
+def usage(message, *args):
+    print(message, file=stderr)
+    exit(1)
 
 # Strengths of jam sources.
 jammer_strengths = {
@@ -59,8 +63,7 @@ class Jam:
         # Parse description.
         stats = re.fullmatch(jam_regex, desc)
         if not stats:
-            print("unknown jammer: %s" % (desc,))
-            exit(1)
+            usage("unknown jammer: %s" % (desc,))
         jam, count = stats.groups()
 
         # Record type.
@@ -105,8 +108,7 @@ class Fitting:
         # Parse description.
         stats = re.fullmatch(fitting_regex, desc)
         if not stats:
-            print("unknown fitting: %s" % (desc,))
-            exit(1)
+            usage("unknown fitting: %s" % (desc,))
         fitting, count = stats.groups()
 
         # Record type.
@@ -148,8 +150,7 @@ parser.add_argument("-f", "--fitting", action="append",
                     dest="fittings")
 args = parser.parse_args()
 if not args.jams:
-    print("no jammers specified")
-    exit(1)
+    usage("no jammers specified")
 if not args.fittings:
     args.fittings = []
 
@@ -158,12 +159,10 @@ jams = [Jam(desc) for desc in args.jams]
 fittings = [Fitting(desc) for desc in args.fittings]
 resist = args.resist
 if resist <= 0:
-    print("non-positive resist:", resist)
-    exit(1)
+    usage("non-positive resist: %d" % (resist,))
 skill = args.skill
 if skill < 1 or skill > 5:
-    print("skill must be between 1 and 5:", skill)
-    exit(1)
+    usage("skill must be between 1 and 5: %d" % (skill,))
 hull = args.hull / 100.0
 
 # https://wiki.eveuniversity.org/Stacking_penalties
