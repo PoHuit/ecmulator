@@ -7,6 +7,7 @@
 
 # Jam probabilities for an EVE Online ECM ship setup.
 
+from math import exp
 from sys import exit
 import argparse
 import re
@@ -54,6 +55,7 @@ class Jam:
         jam, count = stats.groups()
 
         # Record type.
+        self.desc = jam
         self.jam = jam[0]
 
         # Record count.
@@ -81,6 +83,10 @@ parser.add_argument("-s", "--skill", type=int,
                     help="Pilot Signal Dispersion skill level (default 5).",
                     default=5,
                     dest="skill")
+parser.add_argument("-H", "--hull", type=float,
+                    help="Hull bonus percent (default 0).",
+                    default=0.0,
+                    dest="hull")
 args = parser.parse_args()
 if not args.jams:
     print("no jammers specified")
@@ -96,14 +102,22 @@ skill = args.skill
 if skill < 1 or skill > 5:
     print("skill must be between 1 and 5:", skill)
     exit(1)
+hull = args.hull / 100.0
+
+# https://wiki.eveuniversity.org/Stacking_penalties
+def stacking(n):
+    """Compute the stacking penalty for the n-th bonus
+    counting from zero."""
+    return exp(-(n / 2.67)**2)
 
 # Collect the strengths.
 strengths = list()
 for j in jams:
     strength = j.strength
     if j.jam != "D":
-        strength *= 1.0 + 0.05 * skill
+        strength *= (1.0 + 0.05 * skill) * (1.0 + hull)
     strengths += [strength] * j.count
+    print("jam strength:", j.desc, strength)
 
 # Do the math and print the result.
 cp = 1.0

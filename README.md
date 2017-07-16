@@ -59,6 +59,13 @@ Run `python3 ecmulator.py` with appropriate arguments.
   increases by 5% per level. The default of 5 is what a good
   pilot should have.
 
+* The `--hull` (`-H` — don't ask about the uppercase)
+  argument specifies the hull bonus percentage (for example,
+  `30` for 30%) for jammers. The default of 0 reflects an
+  unbonused ship. Hull bonuses must be calculated manually:
+  there's too many cases to be specified to make a
+  programmatic calculation useful.
+
 ## License
 
 This program is licensed under the "MIT License". Please see
