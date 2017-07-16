@@ -44,8 +44,8 @@ jammer_strengths = {
 jam_pattern = "|".join(jammer_strengths.keys())
 jam_regex = re.compile("(%s)(x[1-9])?" % jam_pattern)
 
-# Description of a jam source.
 class Jam:
+    """Description of a jam source."""
     def __init__(self, desc):
         # Parse description.
         stats = re.fullmatch(jam_regex, desc)
@@ -68,7 +68,54 @@ class Jam:
         self.strength = jammer_strengths[jam]
 
     def __str__(self):
-        return "jam=%s str=%g count=%d" % (self.jam, self.strength, self.count)
+        return "%sx%d:strength=%g" % \
+            (self.desc, self.count, self.strength)
+
+# XXX: This next bit is gross copy-paste.
+# Should restructure.
+
+# Bonuses of fittings.
+fitting_bonuses = {
+    # Signal Distortion Amplifier (module)
+    "S1": 0.10, # T1
+    "Si": 0.07, # Initiated
+    "SI": 0.08, # Induced [sigh]
+    "SC": 0.09, # Compulsive
+    "SH": 0.10, # 'Hypnos'
+    "S2": 0.10, # T2
+    # Particle Dispersion Amplifier (rig)
+    "P1": 0.10, # T1
+    "P2": 0.15, # T2
+}
+fitting_pattern = "|".join(fitting_bonuses.keys())
+fitting_regex = re.compile("(%s)(x[1-9])?" % fitting_pattern)
+
+class Fitting:
+    """Description of an ECM fitting."""
+    def __init__(self, desc):
+        # Parse description.
+        stats = re.fullmatch(fitting_regex, desc)
+        if not stats:
+            print("unknown fitting: %s" % (desc,))
+            exit(1)
+        fitting, count = stats.groups()
+
+        # Record type.
+        self.desc = fitting
+        self.fitting = fitting[0]
+
+        # Record count.
+        self.count = 1
+        if count:
+            count_digit = re.fullmatch("x([1-9])", count)
+            self.count = int(count_digit.group(1))
+
+        # Record jammer stats.
+        self.bonus = fitting_bonuses[fitting]
+
+    def __str__(self):
+        return "%sx%d:bonus=%g" % \
+            (self.desc, self.count, self.bonus)
 
 # Parse arguments.
 parser = argparse.ArgumentParser(description="ECM jam probabilities.")
@@ -87,6 +134,9 @@ parser.add_argument("-H", "--hull", type=float,
                     help="Hull bonus percent (default 0).",
                     default=0.0,
                     dest="hull")
+parser.add_argument("-f", "--fitting", action="append",
+                    help="Add a fitting to the fit.",
+                    dest="fittings")
 args = parser.parse_args()
 if not args.jams:
     print("no jammers specified")
@@ -94,6 +144,7 @@ if not args.jams:
 
 # Process arguments.
 jams = [Jam(desc) for desc in args.jams]
+fittings = [Fitting(desc) for desc in args.fittings]
 resist = args.resist
 if resist <= 0:
     print("non-positive resist:", resist)
@@ -110,12 +161,20 @@ def stacking(n):
     counting from zero."""
     return exp(-(n / 2.67)**2)
 
-# Collect the strengths.
+# Collect the fitting bonuses and compute an overall bonus
+# including stacking.
+bonuses = sorted([f.bonus for f in fittings], reverse=True)
+fitting_bonus = 1.0
+for b in range(len(bonuses)):
+    fitting_bonus *= 1.0 + bonuses[b] * stacking(b)
+
+# Collect the bonused jam strengths.
+base_bonus = (1.0 + 0.05 * skill) * (1.0 + hull)
 strengths = list()
 for j in jams:
     strength = j.strength
     if j.jam != "D":
-        strength *= (1.0 + 0.05 * skill) * (1.0 + hull)
+        strength *= base_bonus * fitting_bonus
     strengths += [strength] * j.count
     print("jam strength:", j.desc, strength)
 

@@ -66,6 +66,28 @@ Run `python3 ecmulator.py` with appropriate arguments.
   there's too many cases to be specified to make a
   programmatic calculation useful.
 
+* The `--fitting` (`-f`) argument specifies a rig or module
+  that affects ECM strength. See the description of `--jam`
+  for general syntax. Stacking penalties are applied.
+
+  The *base types* are as follows:
+
+  * S: A Signal Distortion Amplifier module. The *variant*
+    must be one of:
+
+    * 1: T1
+    * i: Initiated
+    * I: Induced *[sigh]*
+    * C: Compulsive
+    * H: 'Hypnos'
+    * 2: T2
+
+  * P: A Particle Dispersion Augmentor rig. The *variant*
+    must be one of:
+
+    * 1: T1
+    * 2: T2
+
 ## License
 
 This program is licensed under the "MIT License". Please see
