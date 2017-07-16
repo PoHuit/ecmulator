@@ -11,8 +11,11 @@ of ECM modules and drones.
 Run `python3 ecmulator.py` with appropriate arguments.
 
 * The `--jam` (`-j`) argument specifies a jam module or
-  drone, including a repeat count for convenience. The
-  module or drone is specified by
+  drone, including a repeat count for convenience.  Multiple
+  `--jam` arguments may be given. All jams are applied to a
+  single target.
+
+  The module or drone is specified in the format
 
   > *\<base-type\>\<variant\>[*`x`*\<count\>]*
 
@@ -49,6 +52,11 @@ Run `python3 ecmulator.py` with appropriate arguments.
     * 2: T2
     * S: Storyline [named]
     * L: Legion
+
+  For example, if you have 1 matched racial meta jammer and 4
+  mismatched racial meta jammers fitted, say
+
+            --j RM --j XMx4
 
 * The `--resist` (`-r`) argument specifies the sensor
   strength of the target hull. The default of 20 represents
