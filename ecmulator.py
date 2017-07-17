@@ -133,7 +133,7 @@ parser = argparse.ArgumentParser(description="ECM jam probabilities.")
 parser.add_argument("-j", "--jam", action="append",
                     help="Add a jam to the fit.",
                     dest="jams")
-parser.add_argument("-r", "--resist", type=int,
+parser.add_argument("-r", "--resist", type=float,
                     help="Sensor strength of target ship (default 20).",
                     default=20,
                     dest="resist")
