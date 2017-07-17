@@ -50,7 +50,7 @@ Run `python3 ecmulator.py` with appropriate arguments.
       * 1: T1
       * M: Meta 1
       * 2: T2
-      * S: Storyline [named]
+      * S: Storyline *[named]*
       * L: Legion
 
   * B: A Burst Jammer. These have a 30 second cycle time
@@ -99,8 +99,8 @@ Run `python3 ecmulator.py` with appropriate arguments.
     must be one of:
 
       * 1: T1
-      * i: Initiated
-      * I: Induced *[sigh]*
+      * i: Initiated  *[ugh lowercase]*
+      * I: Induced
       * C: Compulsive
       * H: 'Hypnos'
       * 2: T2
@@ -115,7 +115,9 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
 * Q: *Why doesn't this tool also deal with ECM ranges?*
 
-  A: Your fitting tool does this fine.
+  A: Your fitting tool calculates the ranges great. There
+  should be an option to provide percent-of-falloff for
+  joint probability calculation, though.
 
 * Q: *Why not just copy jam strengths from my fitting tool?*
 
