@@ -137,6 +137,12 @@ Run `python3 ecmulator.py` with appropriate arguments.
   A: Not yet. You can script something with a plotting tool
      if you want to make your own.
 
+## Thanks
+
+Props to [PyFA](http://github.com/pyfa-org/Pyfa) and the EVE
+University [wiki](http://wiki.eveuniversity.org) for making
+development and checking of this tool much, much easier.
+
 ## License
 
 This program is licensed under the "MIT License". Please see
