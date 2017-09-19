@@ -18,11 +18,11 @@ def usage(message, *args):
 # Strengths of jam sources.
 jammer_strengths = {
     # Drones
-    "D3": 1,
+    "D3": 1.0,
     "D6": 1.5,
-    "D9": 2,
+    "D9": 2.0,
     # Multispectral
-    "M1": 2.2,  # T1
+    "M1": 2.0,  # T1
     "MM": 2.2,  # Meta
     "M2": 2.4,  # T2
     "ML": 2.5,  # Legion
