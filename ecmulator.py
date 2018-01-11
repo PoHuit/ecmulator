@@ -55,7 +55,7 @@ jammer_strengths = {
     "BW": 10.5, # Unit W-634's Modified
 }
 jam_pattern = "|".join(jammer_strengths.keys())
-jam_regex = re.compile("(%s)(x[1-9])?" % jam_pattern)
+jam_regex = re.compile("(%s)(x[1-9])?(H)?" % jam_pattern)
 
 class Jam:
     """Description of a jam source."""
@@ -64,7 +64,7 @@ class Jam:
         stats = re.fullmatch(jam_regex, desc)
         if not stats:
             usage("unknown jammer: %s" % (desc,))
-        jam, count = stats.groups()
+        jam, count, heat = stats.groups()
 
         # Record type.
         self.desc = jam
@@ -79,9 +79,19 @@ class Jam:
         # Record jammer stats.
         self.strength = jammer_strengths[jam]
 
+        # Record heat.
+        self.heat = False
+        if heat:
+            if self.jam == "D":
+                usage("cannot overheat drones")
+            self.heat = True
+
     def __str__(self):
-        return "%sx%d:strength=%g" % \
-            (self.desc, self.count, self.strength)
+        has_heat = ""
+        if self.heat:
+            has_heat = "(H)"
+        return "%sx%d:strength=%g%s" % \
+            (self.desc, self.count, self.strength, has_heat)
 
 # XXX: This next bit is gross copy-paste.
 # Should restructure.
@@ -171,23 +181,31 @@ def stacking(n):
     counting from zero."""
     return exp(-(3.0 * n / 8.0)**2)
 
-# Collect the fitting bonuses and compute an overall bonus
-# including stacking.
-bonuses = list()
+# Collect the fitting bonus multipliers.
+fitting_mults = list()
 for f in fittings:
-    bonuses += [f.bonus] * f.count
-bonuses = sorted(bonuses, reverse=True)
-fitting_bonus = 1.0
-for b in range(len(bonuses)):
-    fitting_bonus *= 1.0 + bonuses[b] * stacking(b)
+    fitting_mults += [f.bonus] * f.count
 
 # Collect the bonused jam strengths.
 base_bonus = (1.0 + 0.05 * skill) * (1.0 + hull)
 strengths = list()
 for j in jams:
     strength = j.strength
+
+    # Non-drone jams get bonuses.
     if j.jam != "D":
+        # Because ECM heat is a stacking bonus, we
+        # compute bonuses per jam.
+        bonuses = list(fitting_mults)
+        if j.heat:
+            bonuses.append(0.2)
+        bonuses = sorted(bonuses, reverse=True)
+        fitting_bonus = 1.0
+        for b in range(len(bonuses)):
+            fitting_bonus *= 1.0 + bonuses[b] * stacking(b)
         strength *= base_bonus * fitting_bonus
+
+    # Save and report the strengths.
     strengths += [strength] * j.count
     print("jam strength:", j.desc, round(strength, 2))
 

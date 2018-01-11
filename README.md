@@ -17,9 +17,11 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
   The module or drone is specified in the format
 
-  > *&lt;base-type&gt;&lt;variant&gt;[*`x`*&lt;count&gt;]*
+  > *&lt;base-type&gt;&lt;variant&gt;\[*`x`*&lt;count&gt;]\[H]*
 
   The *count* defaults to 1 if omitted.
+
+  The `H` indicates that the jam should be overheated (overloaded).
 
   The *base types* are as follows:
 
