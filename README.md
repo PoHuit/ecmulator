@@ -113,31 +113,39 @@ Run `python3 ecmulator.py` with appropriate arguments.
 
 ## Frequently Asked Questions
 
-* Q: *Why doesn't this tool also deal with ECM ranges?*
+Q: *Why doesn't this tool also deal with ECM ranges?*
 
-  A: Your fitting tool calculates the ranges great. There
-  should be an option to provide percent-of-falloff for
-  joint probability calculation, though.
+A: Your fitting tool calculates the ranges great. There
+should be an option to provide percent-of-falloff for
+joint probability calculation, though.
 
-* Q: *Why not just copy jam strengths from my fitting tool?*
+-----
 
-  A: What a pain.
+Q: *Why not just copy jam strengths from my fitting tool?*
 
-* Q: *What about implants?*
+A: What a pain.
 
-  A: As far as I know, there are not any that specifically
-     affect ECM strength.
+-----
 
-* Q: *Why is the syntax for specifying jams and fittings so
-     gross?*
+Q: *What about implants?*
 
-  A: It was designed for brevity and scripting rather than
-     for readability. Patches welcome.
+A: As far as I know, there are not any that specifically
+affect ECM strength.
 
-* Q: *Can you do pretty graphs?*
+-----
 
-  A: Not yet. You can script something with a plotting tool
-     if you want to make your own.
+Q: *Why is the syntax for specifying jams and fittings so
+gross?*
+
+A: It was designed for brevity and scripting rather than
+for readability. Patches welcome.
+
+-----
+
+Q: *Can you do pretty graphs?*
+
+A: Not yet. You can script something with a plotting tool
+if you want to make your own.
 
 ## Thanks
 
