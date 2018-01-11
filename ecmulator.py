@@ -169,7 +169,7 @@ hull = args.hull / 100.0
 def stacking(n):
     """Compute the stacking penalty for the n-th bonus
     counting from zero."""
-    return exp(-(n / 2.67)**2)
+    return exp(-(3.0 * n / 8.0)**2)
 
 # Collect the fitting bonuses and compute an overall bonus
 # including stacking.
