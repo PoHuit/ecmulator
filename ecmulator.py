@@ -187,13 +187,14 @@ for f in fittings:
     fitting_mults += [f.bonus] * f.count
 
 # Collect the bonused jam strengths.
-base_bonus = (1.0 + 0.05 * skill) * (1.0 + hull)
+skill_bonus = 1.0 + 0.05 * skill
+hull_bonus = 1.0 + hull
 strengths = list()
 for j in jams:
     strength = j.strength
 
-    # Non-drone jams get bonuses.
     if j.jam != "D":
+        # ECM jams get bonuses.
         # Because ECM heat is a stacking bonus, we
         # compute bonuses per jam.
         bonuses = list(fitting_mults)
@@ -203,7 +204,10 @@ for j in jams:
         fitting_bonus = 1.0
         for b in range(len(bonuses)):
             fitting_bonus *= 1.0 + bonuses[b] * stacking(b)
-        strength *= base_bonus * fitting_bonus
+        strength *= skill_bonus * fitting_bonus
+        if j.jam != "B":
+            # Burst jammers get limited bonuses.
+            strength *= hull_bonus
 
     # Save and report the strengths.
     strengths += [strength] * j.count
